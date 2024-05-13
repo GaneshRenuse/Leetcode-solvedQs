@@ -1,16 +1,21 @@
-class Node:
-    def __init__(self, head):
-        self.head = head
-        self.next = None
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        cur = dummy
 
-    def newnode(self, head):
-        return Node(head)
+        while list1 and list2:
+            if list1.val > list2.val:
+                cur.next = list2
+                list2 = list2.next
+            else:
+                cur.next = list1
+                list1 = list1.next
 
+            cur = cur.next
 
-a = Node(0)
-a.next = Node(7)
-a.next.next = Node(5)
+        if list1:
+            cur.next = list1
+        else:
+            cur.next = list2
 
-while a.head is not None:
-    print(a.head, end=" ")
-    a.head = a.next
+        return dummy.next
